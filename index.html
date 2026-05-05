@@ -73,6 +73,58 @@
         .product-img:hover {
             transform: translateY(-5px);
         }
+
+        /* --- Add these to your existing styles --- */
+
+        /* Ensure images are fluid and never wider than their container */
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        /* --- Add Media Queries for Responsiveness --- */
+
+        /* Tablets and smaller (around 768px) */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 60px 5%;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+                /* Shrink title slightly */
+            }
+
+            .container {
+                margin: -30px 20px 50px;
+                /* Reduce side margins */
+                padding: 20px;
+            }
+        }
+
+        /* Mobile Phones (around 480px) */
+        @media (max-width: 480px) {
+            nav {
+                flex-direction: column;
+                /* Stack logo and link */
+                gap: 10px;
+                text-align: center;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .logo {
+                font-size: 1.2rem;
+            }
+        }
     </style>
 </head>
 
@@ -81,7 +133,8 @@
     <nav>
         <p class="logo">Bug-Free-Octo-Couscous</p>
         <div>
-            <a href="https://github.com/bug-free-octo-couscous" style="margin-left: 20px; text-decoration: none; color: #666;">github</a>
+            <a href="https://github.com/bug-free-octo-couscous"
+                style="margin-left: 20px; text-decoration: none; color: #666;">github</a>
         </div>
     </nav>
 
