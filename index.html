@@ -1,50 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>bug-free-octo-couscous</title>
+    <title>Bug-Free Octo-Couscous</title>
     <style>
+        /* 1. Reset and Typography */
         body {
-            background: radial-gradient(circle at center, #1e293b 0%, #020617 100%);
-            color: white;
-            font-family: system-ui, sans-serif;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
             margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            line-height: 1.6;
+            background-color: #f8f9fa;
         }
-        .container {
+
+        /* 2. Navigation Bar */
+        nav {
+            background: #fff;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            font-weight: bold;
+            font-size: 1.5rem;
+            color: #2c3e50;
+            text-decoration: none;
+        }
+
+        /* 3. Hero Section */
+        .hero {
+            padding: 80px 10%;
             text-align: center;
-            padding: 2rem;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border-radius: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
         }
-        h1 {
-            letter-spacing: -1px;
-            background: linear-gradient(90deg, #00f2fe 0%, #4facfe 100%);
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
         }
-        img {
-            border-radius: 15px;
-            filter: grayscale(20%);
-            transition: 0.5s;
+
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto 2rem;
         }
-        img:hover {
-            filter: grayscale(0%);
-            box-shadow: 0 0 20px #4facfe;
+
+        /* 4. Content Area */
+        .container {
+            max-width: 1000px;
+            margin: -50px auto 50px;
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            text-align: center;
+        }
+
+        .product-img {
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .product-img:hover {
+            transform: translateY(-5px);
         }
     </style>
 </head>
+
 <body>
+
+    <nav>
+        <p class="logo">Octo-Couscous</p>
+        <div>
+            <a href="https://github.com/bug-free-octo-couscous" style="margin-left: 20px; text-decoration: none; color: #666;">github</a>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <h1>make something cool</h1>
+        <p>Delivering the future of octo-couscous technology with precision and style.</p>
+    </header>
+
     <div class="container">
-        <h1>bug-free-octo-couscous</h1>
-        <img src="bug-free-octo-couscous.png" width="300" alt="Octo-Couscous">
-        <p style="opacity: 0.6; margin-top: 20px;">100% tasty.</p>
+        <img src="bug-free-octo-couscous.png" width="400" alt="Octo-Couscous" class="product-img">
     </div>
+
 </body>
+
 </html>
