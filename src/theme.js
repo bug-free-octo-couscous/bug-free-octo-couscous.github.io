@@ -1,18 +1,19 @@
-// ── Color palette ──────────────────────────────────────────────────────────
-export const BG    = '#080c12';
-export const SURF  = '#0e1420';
-export const SURF2 = '#141d2e';
-export const SURF3 = '#1a2438';
-export const BD    = '#1f2e45';
-export const TX    = '#bfcfe8';
-export const MU    = '#4d6480';
-export const ACC   = '#38bdf8';
-export const KW    = '#fb923c';
-export const TY    = '#a78bfa';
-export const IV    = '#34d399';
-export const CM    = '#2d4a66';
-export const WARN  = '#fbbf24';
+// ── Color palette — moderate warm-stone theme ─────────────────────────────
+export const BG    = '#ccc8be';        // warm stone — medium, not bright
+export const SURF  = '#d6d2c8';        // slightly lighter surface
+export const SURF2 = '#bfbbb1';        // code block background (deeper)
+export const SURF3 = '#b5b1a7';        // deepest surface
+export const BD    = '#a8a49b';        // border
+export const TX    = '#19180f';        // near-black text
+export const MU    = '#4e4940';        // muted text (more readable on mid bg)
+export const ACC   = '#3d36c8';        // indigo accent (slightly deepened)
+export const ACC2  = '#6b28d4';        // violet (secondary accent)
+export const KW    = '#b83a0a';        // orange-red for keywords
+export const TY    = '#6b28d4';        // violet for types
+export const IV    = '#047a55';        // emerald for interval (deepened)
+export const CM    = '#7a7670';        // gray for comments
+export const WARN  = '#9a4808';        // amber warning
 
 // ── Font stacks ─────────────────────────────────────────────────────────────
 export const mono  = `'Cascadia Code','Fira Code','JetBrains Mono',monospace`;
-export const serif = `Georgia,'Times New Roman',serif`;
+export const serif = `'Palatino Linotype','Palatino','Book Antiqua',Georgia,serif`;

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { BG, BD, TX, ACC, mono } from './theme.js';
+import { BG, BD, TX, ACC, ACC2, mono, serif } from './theme.js';
 import { Sidebar }    from './components/Sidebar.jsx';
 import { Overview }   from './sections/Overview.jsx';
 import { QuickStart } from './sections/QuickStart.jsx';
@@ -23,9 +23,9 @@ const SECTIONS = {
 };
 
 export default function App() {
-  const [active, setActive]       = useState('overview');
+  const [active, setActive]           = useState('overview');
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const { isMobile, isTablet }    = useResponsive();
+  const { isMobile, isTablet }        = useResponsive();
   const isNarrow = isMobile || isTablet;
 
   function handleSelect(id) {
@@ -34,15 +34,18 @@ export default function App() {
   }
 
   return (
-    <div style={{ display: 'flex', minHeight: '100vh', background: BG, color: TX, fontFamily: mono, fontSize: 14 }}>
+    <div style={{
+      display: 'flex', minHeight: '100vh',
+      background: BG, color: TX, fontFamily: mono, fontSize: 14,
+    }}>
 
       {/* ── Mobile overlay backdrop ── */}
       {isNarrow && sidebarOpen && (
         <div
           onClick={() => setSidebarOpen(false)}
           style={{
-            position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.55)',
-            zIndex: 40, backdropFilter: 'blur(2px)',
+            position: 'fixed', inset: 0, background: 'rgba(30,20,60,0.35)',
+            zIndex: 40, backdropFilter: 'blur(3px)',
           }}
         />
       )}
@@ -66,19 +69,23 @@ export default function App() {
       {isNarrow && (
         <header style={{
           position: 'fixed', top: 0, left: 0, right: 0, zIndex: 30,
-          height: 52,
-          background: BG,
+          height: 54,
+          background: 'rgba(247,246,242,0.92)',
+          backdropFilter: 'blur(10px)',
           borderBottom: `1px solid ${BD}`,
           display: 'flex', alignItems: 'center',
-          padding: '0 16px', gap: 14,
+          padding: '0 18px', gap: 14,
+          boxShadow: '0 1px 8px rgba(0,0,0,0.06)',
         }}>
           <button
             onClick={() => setSidebarOpen(v => !v)}
             aria-label="Toggle navigation"
             style={{
-              background: 'none', border: 'none', cursor: 'pointer',
-              padding: 6, color: ACC, display: 'flex', flexDirection: 'column',
-              gap: 5, borderRadius: 4,
+              background: sidebarOpen ? ACC + '15' : 'none',
+              border: `1px solid ${sidebarOpen ? ACC + '40' : 'transparent'}`,
+              cursor: 'pointer',
+              padding: '6px 8px', color: ACC, display: 'flex', flexDirection: 'column',
+              gap: 5, borderRadius: 7, transition: 'all 0.15s',
             }}
           >
             {[0, 1, 2].map(i => (
@@ -95,11 +102,18 @@ export default function App() {
               }} />
             ))}
           </button>
-          <div style={{ fontSize: 16, fontWeight: 700, letterSpacing: 2, color: ACC }}>
+          <div style={{
+            fontSize: 18, fontWeight: 700, letterSpacing: '-0.5px',
+            fontFamily: serif,
+            background: `linear-gradient(135deg, ${ACC} 0%, ${ACC2} 100%)`,
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
+          }}>
             octo
           </div>
-          <div style={{ fontSize: 10, color: '#4d6480', letterSpacing: 1 }}>
-            CUBICAL TYPE THEORY
+          <div style={{ fontSize: 10, color: '#9ca3af', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+            Cubical Type Theory
           </div>
         </header>
       )}
@@ -108,15 +122,14 @@ export default function App() {
       <main style={{
         flex: 1,
         padding: isMobile
-          ? '72px 18px 40px'
+          ? '74px 20px 48px'
           : isTablet
-          ? '72px 32px 40px'
-          : '40px 52px',
-        maxWidth: 820,
+          ? '74px 36px 48px'
+          : '52px 64px',
+        maxWidth: 840,
         overflowY: 'auto',
         minHeight: '100vh',
-        // On desktop the sidebar takes 220px; on narrow it's overlaid so we don't offset
-        marginLeft: isNarrow ? 0 : 220,
+        marginLeft: isNarrow ? 0 : 230,
         boxSizing: 'border-box',
         width: '100%',
       }}>

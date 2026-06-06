@@ -1,4 +1,4 @@
-import { ACC, BD, CM, MU, SURF2, TX, TY, WARN, mono, serif } from '../theme.js';
+import { ACC, ACC2, BD, CM, MU, SURF, SURF2, TX, TY, WARN, mono, serif } from '../theme.js';
 import { useResponsive } from '../hooks/useResponsive.js';
 
 // ── Typography ──────────────────────────────────────────────────────────────
@@ -6,9 +6,15 @@ import { useResponsive } from '../hooks/useResponsive.js';
 export function H1({ children }) {
   return (
     <h1 style={{
-      fontFamily: serif, fontSize: 'clamp(22px, 4vw, 30px)', fontWeight: 400, color: TX,
-      borderBottom: `2px solid ${ACC}`, paddingBottom: 12,
-      marginBottom: 28, marginTop: 0, letterSpacing: '-0.3px',
+      fontFamily: serif,
+      fontSize: 'clamp(24px, 4vw, 34px)',
+      fontWeight: 400,
+      color: TX,
+      borderBottom: `2px solid transparent`,
+      borderImage: `linear-gradient(90deg, ${ACC} 0%, ${ACC2} 100%) 1`,
+      paddingBottom: 14,
+      marginBottom: 30, marginTop: 0, letterSpacing: '-0.4px',
+      lineHeight: 1.2,
     }}>
       {children}
     </h1>
@@ -18,9 +24,18 @@ export function H1({ children }) {
 export function H2({ children }) {
   return (
     <h2 style={{
-      fontFamily: serif, fontSize: 'clamp(17px, 3vw, 20px)', fontWeight: 400, color: ACC,
-      marginTop: 36, marginBottom: 14, letterSpacing: '-0.2px',
+      fontFamily: serif,
+      fontSize: 'clamp(17px, 3vw, 21px)',
+      fontWeight: 400,
+      color: ACC,
+      marginTop: 40, marginBottom: 14, letterSpacing: '-0.2px',
+      display: 'flex', alignItems: 'center', gap: 8,
     }}>
+      <span style={{
+        display: 'inline-block', width: 4, height: 18,
+        background: `linear-gradient(to bottom, ${ACC}, ${ACC2})`,
+        borderRadius: 2, flexShrink: 0,
+      }} />
       {children}
     </h2>
   );
@@ -28,7 +43,10 @@ export function H2({ children }) {
 
 export function P({ children }) {
   return (
-    <p style={{ color: MU, lineHeight: 1.85, marginBottom: 14, fontSize: 14.5 }}>
+    <p style={{
+      color: MU, lineHeight: 1.9, marginBottom: 16, fontSize: 15,
+      fontFamily: `Georgia,'Times New Roman',serif`,
+    }}>
       {children}
     </p>
   );
@@ -39,9 +57,13 @@ export function P({ children }) {
 export function IC({ children, color = ACC }) {
   return (
     <code style={{
-      background: SURF2, border: `1px solid ${BD}`, borderRadius: 4,
-      padding: '1px 6px', fontFamily: mono, fontSize: '0.85em', color,
+      background: SURF2,
+      border: `1px solid ${BD}`,
+      borderRadius: 5,
+      padding: '1px 7px',
+      fontFamily: mono, fontSize: '0.84em', color,
       wordBreak: 'break-word',
+      boxShadow: '0 1px 2px rgba(0,0,0,0.04)',
     }}>
       {children}
     </code>
@@ -51,9 +73,12 @@ export function IC({ children, color = ACC }) {
 export function Pill({ children, color = TY }) {
   return (
     <span style={{
-      background: color + '18', border: `1px solid ${color}44`,
-      borderRadius: 4, padding: '2px 8px', fontSize: 12, color,
-      fontFamily: mono, marginRight: 4,
+      background: color + '15',
+      border: `1px solid ${color}40`,
+      borderRadius: 20,
+      padding: '3px 10px', fontSize: 12, color,
+      fontFamily: mono, marginRight: 6,
+      fontWeight: 500,
     }}>
       {children}
     </span>
@@ -63,12 +88,19 @@ export function Pill({ children, color = TY }) {
 // ── Block elements ──────────────────────────────────────────────────────────
 
 export function Note({ children, kind = 'info' }) {
-  const colors = { info: [ACC, '#0c1f2e'], warn: [WARN, '#1f1800'] };
-  const [c, bg] = colors[kind] || colors.info;
+  const colors = {
+    info: [ACC, '#eef2ff', '#c7d2fe'],
+    warn: [WARN, '#fffbeb', '#fde68a'],
+  };
+  const [c, bg, border] = colors[kind] || colors.info;
   return (
     <div style={{
-      background: bg, border: `1px solid ${c}33`, borderRadius: 8,
-      padding: '12px 16px', margin: '16px 0', fontSize: 13.5, color: c, lineHeight: 1.7,
+      background: bg,
+      border: `1px solid ${border}`,
+      borderLeft: `4px solid ${c}`,
+      borderRadius: '0 8px 8px 0',
+      padding: '12px 18px',
+      margin: '18px 0', fontSize: 13.5, color: c, lineHeight: 1.75,
     }}>
       {children}
     </div>
@@ -80,20 +112,26 @@ export function Row({ left, right, lc = TX }) {
   return (
     <div style={{
       display: isMobile ? 'block' : 'grid',
-      gridTemplateColumns: isMobile ? undefined : '200px 1fr',
-      gap: isMobile ? '2px 0' : '0 20px',
-      padding: isMobile ? '10px 0' : '8px 0',
+      gridTemplateColumns: isMobile ? undefined : '210px 1fr',
+      gap: isMobile ? '2px 0' : '0 24px',
+      padding: isMobile ? '10px 0' : '9px 12px',
       borderBottom: `1px solid ${BD}`,
-    }}>
+      borderRadius: 0,
+      transition: 'background 0.12s',
+    }}
+    onMouseEnter={e => { e.currentTarget.style.background = '#f4f3ff'; }}
+    onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; }}
+    >
       <code style={{
-        fontFamily: mono, fontSize: 13, color: lc,
+        fontFamily: mono, fontSize: 12.5, color: lc,
         display: 'block',
         marginBottom: isMobile ? 3 : 0,
         wordBreak: 'break-all',
+        fontWeight: 500,
       }}>
         {left}
       </code>
-      <span style={{ color: MU, fontSize: 13.5, lineHeight: 1.7 }}>{right}</span>
+      <span style={{ color: MU, fontSize: 13.5, lineHeight: 1.75 }}>{right}</span>
     </div>
   );
 }

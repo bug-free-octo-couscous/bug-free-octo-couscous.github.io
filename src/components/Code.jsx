@@ -11,7 +11,6 @@ function tokenize(src) {
   let i = 0;
 
   while (i < src.length) {
-    // Line comments
     if (src[i] === '-' && src[i + 1] === '-') {
       let j = src.indexOf('\n', i);
       if (j < 0) j = src.length;
@@ -20,7 +19,6 @@ function tokenize(src) {
       continue;
     }
 
-    // Whitespace
     if (/\s/.test(src[i])) {
       let j = i;
       while (j < src.length && /\s/.test(src[j])) j++;
@@ -29,16 +27,13 @@ function tokenize(src) {
       continue;
     }
 
-    // Braces (interval vars)
     if (src[i] === '{') {
       const j = src.indexOf('}', i);
       if (j >= 0) { res.push({ t: src.slice(i, j + 1), c: IV }); i = j + 1; continue; }
     }
 
-    // @ operator
     if (src[i] === '@') { res.push({ t: '@', c: IV }); i++; continue; }
 
-    // Identifiers and keywords
     if (/[a-zA-Z_]/.test(src[i])) {
       let j = i;
       while (j < src.length && /[a-zA-Z0-9_']/.test(src[j])) j++;
@@ -48,7 +43,6 @@ function tokenize(src) {
       continue;
     }
 
-    // Interval endpoints (0 / 1 not followed by alnum)
     if ((src[i] === '0' || src[i] === '1') &&
         (i + 1 >= src.length || !/[a-zA-Z0-9_]/.test(src[i + 1]))) {
       res.push({ t: src[i], c: IV });
@@ -56,7 +50,6 @@ function tokenize(src) {
       continue;
     }
 
-    // Everything else (punctuation / operators)
     res.push({ t: src[i], c: MU });
     i++;
   }
@@ -68,10 +61,13 @@ export function Code({ children, compact = false }) {
   const tokens = tokenize(children);
   return (
     <pre style={{
-      background: SURF2, border: `1px solid ${BD}`, borderRadius: 8,
-      padding: compact ? '10px 14px' : '16px 20px',
-      fontFamily: mono, fontSize: 13, lineHeight: 1.75,
-      overflowX: 'auto', margin: '12px 0', color: TX, whiteSpace: 'pre',
+      background: SURF2,
+      border: `1px solid ${BD}`,
+      borderRadius: 10,
+      padding: compact ? '10px 16px' : '18px 22px',
+      fontFamily: mono, fontSize: 13, lineHeight: 1.8,
+      overflowX: 'auto', margin: '14px 0', color: TX, whiteSpace: 'pre',
+      boxShadow: 'inset 0 1px 3px rgba(0,0,0,0.04)',
     }}>
       {tokens.map((tk, i) => (
         <span key={i} style={{ color: tk.c }}>{tk.t}</span>
